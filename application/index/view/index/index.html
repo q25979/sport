@@ -1,0 +1,25 @@
+{extend name="public:base" /}
+
+{block name="body"}
+  <div class="layui-row layui-col-space5">
+    <div class="layui-col-md5">
+      <div class="layui-row grid-demo">
+        <div class="layui-col-md12">
+          <label class="layui-form-label">天堂体育：</label>
+          <button
+            onclick='_671.goto("{:url('sportData')}")'
+            type="button"
+            class="layui-btn">体育新闻</button>
+          <button
+            onclick='_671.goto("{:url('sportData')}")'
+            type="button"
+            class="layui-btn">今日赛事</button>
+          <button
+            onclick='_671.goto("{:url('sportData')}")'
+            type="button"
+            class="layui-btn">用户管理</button>
+        </div>
+      </div>
+    </div>
+  </div>
+{/block}

@@ -1,0 +1,104 @@
+{extend name="public:base" /}
+
+{block name="body"}
+  <div class="layui-form" lay-filter="form">
+    <div class="layui-form-item">
+      <label class="layui-form-label">自动采集</label>
+      <div class="layui-input-inline">
+        <input placeholder="请输入要采集的链接" class="layui-input">
+      </div>
+      <button type="button" class="layui-btn">采集</button>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">标题</label>
+      <div class="layui-input-block">
+        <input type="text" name="title" required  lay-verify="required" placeholder="请输入标题" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">作者</label>
+      <div class="layui-input-block">
+        <input type="text" name="author" required  lay-verify="required" placeholder="请输入作者名称" autocomplete="off" class="layui-input">
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">类型</label>
+      <div class="layui-input-block">
+        <select name="type" lay-verify="required">
+          <option value="1">CBA</option>
+          <option value="2">NBA</option>
+          <option value="3">中国足球</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">封面类型</label>
+      <div class="layui-input-block">
+        <select lay-verify="required" lay-filter="covertype">
+          <option value="1">1图封面</option>
+          <option value="2">3图封面</option>
+        </select>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">封面上传</label>
+      <button class="layui-btn" lay-filter="formDemo">上传封面1</button>
+      <button id="cover1" class="layui-btn" lay-filter="formDemo">上传封面2</button>
+      <button id="cover2" class="layui-btn" lay-filter="formDemo">上传封面3</button>
+    </div>
+    <div class="layui-form-item">
+      <label class="layui-form-label">是否推荐</label>
+      <div class="layui-input-block">
+        <input type="checkbox" name="is_tj" lay-skin="switch">
+      </div>
+    </div>
+    <div class="layui-form-item layui-form-text">
+      <label class="layui-form-label">内容</label>
+      <div class="layui-input-block">
+        <textarea id="content" name="content" style="display: none"></textarea>
+      </div>
+    </div>
+    <div class="layui-form-item">
+      <div class="layui-input-block">
+        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+        <button onclick="_671.goback()" class="layui-btn layui-btn-primary">返回</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    layui.use(['form', 'layedit'], function(){
+      var form = layui.form
+      var layedit = layui.layedit
+
+      // 初始化数据
+      form.val('form', {})
+
+      form.on('select(covertype)', function(data) {
+        let type = data.value
+        hide(parseInt(type))
+      })
+
+      form.on('submit(formDemo)', function(data){
+        layer.msg(JSON.stringify(data.field))
+        return false
+      })
+
+      // 富文本编辑器
+      layedit.build('content')
+    })
+
+    // 隐藏/显示
+    var hide = function(type) {
+      if (type === 1) {
+        $("#cover1").css('display', 'none')
+        $("#cover2").css('display', 'none')
+      } else {
+        $("#cover1").css('display', 'inline-block')
+        $("#cover2").css('display', 'inline-block')
+      }
+    }
+
+    hide(1)
+  </script>
+{/block}

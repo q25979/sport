@@ -1,0 +1,38 @@
+{extend name="public:base" /}
+
+{block name="body"}
+  <div class="layui-btn-group">
+    <button onclick="_671.goto('{:url("addData")}')" type="button" class="layui-btn">增加数据</button>
+    <button type="button" class="layui-btn">批量删除</button>
+    <button onclick="_671.goback()" type="button" class="layui-btn">返回</button>
+  </div>
+
+  <table id="data" lay-filter="data"></table>
+
+  <script>
+    layui.use('table', function(){
+      var table = layui.table;
+
+      table.render({
+        size: 'sm',
+        elem: '#data',
+        url: '{:url("sportData")}',
+        page: true,
+        cols: [[
+          {field: 'id', title: 'ID', align: 'center', width: 60, fixed: 'left'},
+          {field: 'title', title: '标题', align: 'center', width: 200},
+          {field: 'author', title: '作者', align: 'center', width: 100},
+          {field: 'cover', title: '封面', align: 'center', width: 100},
+          {field: 'type', title: '类型', align: 'center', width: 100},
+          {field: 'create_time', title: '创建时间', align: 'center', width: 120},
+          {title: '操作', align: 'center', width: 140, toolbar: '#tool'}
+        ]]
+      })
+    })
+  </script>
+
+  <script type="text/html" id="tool">
+    <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+  </script>
+{/block}
